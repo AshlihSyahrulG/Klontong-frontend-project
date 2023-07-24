@@ -1,10 +1,13 @@
-import Register from "./assets/pages/Register"
+import { Provider } from 'react-redux'
+import store from './assets/store'
+import Register from './assets/pages/Register'
 
 
 function App() {
-
   return (
-    <Register />
+    <Provider store={store}>
+      <Register/>
+    </Provider>
   )
 }
 
