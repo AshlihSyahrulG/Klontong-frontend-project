@@ -14,3 +14,28 @@ export function  useRegister(data: any) {
         return res
       })
 }
+
+export function useLogin(data:any) {
+    return async function () {
+      try {
+        const temp = await fetch("http://localhost:3000/login", {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        const data2 = await temp.json()
+       
+        localStorage.setItem('access_token', data2.access_token)
+
+        return data2
+
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+  }
