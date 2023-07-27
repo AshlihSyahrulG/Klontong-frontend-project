@@ -39,3 +39,39 @@ export function useLogin(data:any) {
       }
     }
   }
+
+  export function fecthProduct(page: number = 0){
+    return async (dispatch:any) => {
+      const data = await fetch('http://localhost:3000/?page=' + page)
+      const toJson = await data.json()
+      const res = toJson.product
+      dispatch({
+        type: 'product/fetchSuccess',
+        payload : res
+      })
+    }
+    
+  }
+
+export const addProductToServer = (data: any) => {
+    return async () => {
+      try {
+        const temp = await fetch("http://localhost:3000/", {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        const data2 = await temp.json()
+        if (data2.id) {
+          return "SUCCESS"
+        }
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+  }

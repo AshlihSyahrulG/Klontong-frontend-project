@@ -1,9 +1,9 @@
 import { applyMiddleware, legacy_createStore as createStore } from 'redux'
 import thunk from 'redux-thunk'
-import { counterReducerItem } from './reducers/reducers'
+import { counterReducerProduct } from './reducers/reducers'
 
 
 
-let store = createStore(counterReducerItem,applyMiddleware(thunk))
+let store = createStore(counterReducerProduct,applyMiddleware(thunk))
 
 export default store

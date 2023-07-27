@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import type {} from 'redux-thunk/extend-redux';
 import { useRegister } from "../store/actions/action";
+import { useNavigate } from "react-router-dom";
 interface User {
     email: string;
     password: string;
@@ -9,6 +10,7 @@ interface User {
 
 const Register: React.FC = () => {
     const dispatch = useDispatch()
+    const navigation = useNavigate()
     const [form,setForm] = useState<User>({
         email:"",
         password:""
@@ -24,6 +26,9 @@ const Register: React.FC = () => {
         const response = await dispatch(useRegister(form))
         
         console.log(response);
+        if (response == "Register Success") {
+            navigation("/")
+        }
     }
     
     return (

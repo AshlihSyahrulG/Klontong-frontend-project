@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLogin } from "../store/actions/action";
-
+import { useNavigate } from "react-router-dom";
 
 interface User {
     email: string;
@@ -9,6 +9,7 @@ interface User {
 }
 const Login: React.FC = () => {
     const dispatch = useDispatch()
+    const navigation = useNavigate()
 
     const [ form,setForm] = useState<User>({
         email:"",
@@ -23,8 +24,10 @@ const Login: React.FC = () => {
     const postLogin = async (event:any)=> {
         event.preventDefault()
         const response = await dispatch(useLogin(form))
-        console.log(response);
-        
+        console.log(response);   
+        if (localStorage.getItem("access_token")) {
+            navigation("/product")
+        }     
     }
     return (
         <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
